@@ -20,14 +20,22 @@ const RegisterPage = () => {
       toast.error("Passwords do not match");
       return;
     }
-    const formData = { name, email, password };
+    const formData = {
+      username: name,
+      email,
+      password,
+      fullname: name,
+      gender: true,
+      phonenumber: "0123456789",
+    };
+
     try {
-      const response = await axios.post("http://localhost:9999/api/auth/signup", formData);
-      //mess này trả về từ server, hàm sign up bên trong authController ấy
-      if (!response.status === 201) {
+      const response = await axios.post("http://localhost:8080/api/auth/signup", formData);
+      if (response.status !== 201) {
         toast.error(response.data.message);
         return;
       }
+
       console.log(response.user);
       toast.success("Account created successfully.");
       navigate("/login");
