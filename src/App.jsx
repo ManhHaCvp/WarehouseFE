@@ -17,6 +17,8 @@ import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 
 import NotFoundPage from "./pages/error/NotFoundPage";
 import ComingSoon from "./pages/error/ComingSoon";
+import AdminLayout from "./components/admin/Layout";
+import ManageUser from "./components/admin/ManageUser";
 
 export const UserContext = createContext({});
 
@@ -49,6 +51,13 @@ function App() {
             <Route path="/login" element={!userAuth.accessToken ? <LoginPage /> : <Navigate to="/" />} />
             <Route path="/register" element={!userAuth.accessToken ? <RegisterPage /> : <Navigate to="/" />} />
             <Route path="/forgot-password" element={!userAuth.accessToken ? <ForgotPasswordPage /> : <Navigate to="/" />} />
+            <Route path="/user/profile" element={userAuth.accessToken ? <UserProfile /> : <Navigate to="/login" />} />
+
+              <Route element={<AdminLayout />}>
+                {/* <Route path="/admin/dashboard" element={<Dashboard />} />  */}
+                <Route path="/admin/users" element={<ManageUser />} /> 
+               
+            </Route>
 
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

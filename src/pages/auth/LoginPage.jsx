@@ -14,7 +14,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/signin", {
+      const response = await axios.post("https://user-management-60ly.onrender.com/api/auth/signin", {
         username: email,
         password,
       });
