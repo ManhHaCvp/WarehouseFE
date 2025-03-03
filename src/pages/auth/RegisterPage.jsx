@@ -30,7 +30,7 @@ const RegisterPage = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/signup", formData);
+      const response = await axios.post("https://user-management-60ly.onrender.com/api/auth/signup", formData);
       if (response.status !== 201) {
         toast.error(response.data.message);
         return;

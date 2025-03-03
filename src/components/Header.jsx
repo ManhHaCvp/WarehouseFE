@@ -17,21 +17,22 @@ const Header = () => {
         "http://localhost:9999/api/auth/logout",
         {
           userId: userAuth.user.id,
-        },
-        {
-          headers: {
-            token: `Bearer ${userAuth.accessToken}`,
-          },
-        },
+        }
+        // ,
+        // {
+        //   headers: {
+        //     token: `Bearer ${userAuth.accessToken}`,
+        //   },
+        // },
       );
       sessionStorage.removeItem("accessToken");
       sessionStorage.removeItem("user");
-      setUserAuth({ accessToken: null, user: null });
+      setUserAuth({  user: null });
       toast.success("Logged out successfully");
       navigate("/");
     } catch (error) {
       if (error.response?.data?.message === "Token is not valid. Forbidden!") {
-        sessionStorage.removeItem("accessToken");
+        // sessionStorage.removeItem("accessToken");
         sessionStorage.removeItem("user");
         setUserAuth({ accessToken: null, user: null });
       }
@@ -43,7 +44,7 @@ const Header = () => {
     <header className="border-b shadow-md">
       <div className="bg-black text-white py-2">
         <div className="container mx-auto flex justify-end items-center px-4">
-          {userAuth.accessToken ? (
+          {userAuth?.user ? (
             <div>
               {userAuth.user?.name}
               <span className="ml-4 mr-4">|</span>
@@ -69,18 +70,18 @@ const Header = () => {
           </nav>
         </div>
         <div className="flex items-center">
-          {userAuth.user?.role === "user" && (
+          {userAuth?.user?.role === "user" && (
             <Link to="/cart" className="mr-4 relative">
               <button
                 className="bg-white hover:bg-gray-50 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow flex items-center"
-                disabled={!userAuth.accessToken || userAuth.user?.role !== "user"}
+                disabled={ userAuth.user?.role !== "user"}
               >
                 <CiShoppingCart className="h-5 w-5 opacity-75 hover:opacity-100 text-black" />
               </button>
               {/* <span className="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">12</span> */}
             </Link>
           )}
-          {userAuth.user?.role === "user" && (
+          {userAuth?.user?.role === "user" && (
             <Link to="/wishlist" className="mr-4">
               <button className="bg-white hover:bg-gray-50 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow" disabled={!userAuth.accessToken || userAuth.user?.role !== "user"}>
                 <CiHeart className="h-5 w-5 opacity-55 hover:opacity-85 text-black" />
@@ -88,7 +89,7 @@ const Header = () => {
             </Link>
           )}
           {/* admin */}
-          {(userAuth.user?.role === "admin" || userAuth.user?.role === "seller") && (
+          {(userAuth?.user?.role === "admin" || userAuth?.user?.role === "seller") && (
             <Link to="/admin/dashboard" className="mr-4">
               <button className="bg-white hover:bg-gray-50 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow">
                 <AiOutlineDashboard className="h-5 w-5 opacity-75 hover:opacity-100 text-black" />
@@ -97,7 +98,7 @@ const Header = () => {
           )}
 
           {/* user profile */}
-          {userAuth.accessToken && (
+          {userAuth?.user && (
             <Link to="/user/profile" className="mr-4">
               <button className="bg-white hover:bg-gray-50 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow ">
                 <CiUser className="h-5 w-5 opacity-55 hover:opacity-85 text-black" />
@@ -105,7 +106,7 @@ const Header = () => {
             </Link>
           )}
 
-          {userAuth.accessToken && (
+          {userAuth?.user && (
             <>
               <span className="ml-4 mr-4 opacity-25">|</span>
               <button onClick={handleLogout} className="bg-white hover:bg-gray-50 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow flex items-center">
