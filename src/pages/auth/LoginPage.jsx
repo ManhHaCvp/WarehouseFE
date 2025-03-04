@@ -44,11 +44,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden">
+    <div className="flex h-screen w-screen overflow-hidden p-2">
       <div className="flex flex-col justify-center items-center w-1/2 h-full bg-[#182F73] rounded-3xl">
         <div className="absolute top-4 left-4 flex items-center px-4 py-2 rounded-md">
-          <img src="/icon.svg" alt="Logo" className="w-10 h-10 mr-2" />
-          <span className="text-lg font-bold text-white">NATRUMAX</span>
+          <img src="/test.svg" alt="Logo" className="w-25 h-25 mr-2 mt-4 ml-4" />
         </div>
         <img src="/icon.svg" alt="Logo" className="w-80 h-80" />
 
