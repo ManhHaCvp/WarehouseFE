@@ -44,6 +44,7 @@ const LoginPage = () => {
   };
 
   return (
+    // Test
     <div className="flex h-screen w-screen overflow-hidden p-2">
       <div className="flex flex-col justify-center items-center w-1/2 h-full bg-[#182F73] rounded-3xl">
         <div className="absolute top-4 left-4 flex items-center px-4 py-2 rounded-md">
